@@ -11,14 +11,18 @@ thoughts on steps:
 --create unit tests for each section as needed
 """
 
-# section for framework around the game
-print("Welcome to the greatest tic tac toe game ever created!!!!")
-input("Would you like to play a game??:  ")
+# Starting section
+print("Welcome to the greatest tic tac toe game ever created!!!!\n")
+print(""""The rules of this game are:
+1: Players decide who will be 'X' and 'O'.
+2: Player that will start will be randomly decided.
+3: Player will determine where to place the game piece by selecting a number, the numbers will match the layout of the keyboard number pad.\n""")
 
-# board display section
 location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
             'loc5': '-', 'loc6': '-', 'loc7': '-', 'loc8': '-', 'loc9': '-'}
-
+start_player = 0
+first_player = 'x'
+second_player = 'x'
 
 def displayGameBoard(location):
     # pass
@@ -39,9 +43,40 @@ def displayGameBoard(location):
     print('   |   |   ')
     print('')
 
+def game_start_launch():
+    global start_player, first_player, second_player
+    playgame = input("Would you like to play a game? (y/n):  ")
+    if playgame.lower() == 'y':
+        from random import random
+        first_player = input("Name of first player:(this will be the 'X' person)  ")
+        second_player = input("Name of second player:(this will be the 'O' person) ")
+        if random() >= .5:
+            start_player = 1
+        if start_player == 0:
+            print(f'\n{first_player} will start the game and go first')
+        else:
+            print(f'\n{second_player} will start the game and go first')    
+        game_turn(start_player)
+    elif playgame.lower() == 'n':
+        print("Goodbye")
+        exit() 
+    else:
+        print('Please select either y or n:')
+        game_start_launch()      
+   
 
-location['loc1'] = "X"
-print(location)
+def game_turn(start_player):
+    #pass
+    loc = input('Please select 1-9 to place your mark: ')
+
+
+
+game_start_launch()
+
+
+
+### location['loc1'] = "X"
+#print(location)
 displayGameBoard(location)
 
 
