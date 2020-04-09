@@ -34,4 +34,14 @@ def displayGameBoard():
 
 displayGameBoard()
 
+def test_display():
+    from random import random 
+    # random.random()
+    x = ''
+    o = ''
+    if random.random() >= .5:
+        print("x")
+
+
+test_display()
 ### 
