@@ -19,14 +19,14 @@ print(""""The rules of this game are:
 2: Player that will start will be randomly decided.
 3: Player will determine where to place the game piece by selecting a number, the numbers will match the layout of the keyboard number pad.\n""")
 '''
-location = {'loc1': '-', 'loc2': 'X', 'loc3': 'X', 'loc4': '-',
- 'loc5': 'X', 'loc6': 'X', 'loc7': 'X', 'loc8': '-', 'loc9': '-'}
+#location = {'loc1': '-', 'loc2': 'X', 'loc3': 'X', 'loc4': '-',
+# 'loc5': 'X', 'loc6': 'X', 'loc7': 'X', 'loc8': '-', 'loc9': '-'}
 
 #location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
 #            'loc5': '-', 'loc6': '-', 'loc7': 'O', 'loc8': 'O', 'loc9': 'O'}
 
-#location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
-#            'loc5': '-', 'loc6': '-', 'loc7': '-', 'loc8': '-', 'loc9': '-'}            
+location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
+            'loc5': '-', 'loc6': '-', 'loc7': '-', 'loc8': '-', 'loc9': '-'}            
 
 win_combo = [('loc1','loc2','loc3'),('loc4','loc5','loc6'),('loc7','loc8','loc9'),('loc2','loc5','loc8'),('loc1','loc5','loc9'),('loc3','loc5','loc7')]
 
@@ -93,18 +93,23 @@ def validate_input(loc):
 
 def game_turn():
     #pass
+    continue_game = True
     global start_player
-    current_player = start_player
-    loc = input('Please select 1-9 to place your mark: ')
-    validate_input(loc)
-    set_mark_board(loc, current_player)
-    game_win_check(location)
-    if 1:
-        print('WINNER!!!!')
-    current_player = not current_player
-    start_player = current_player
-    
-    displayGameBoard(location)
+    if continue_game == True:
+        current_player = start_player
+        loc = input('Please select 1-9 to place your mark: ')
+        validate_input(loc)
+        set_mark_board(loc, current_player)
+        game_win_check(location)
+        if game_win_check == 1:
+            print('WINNER!!!!')
+            exit()
+        else:
+            current_player = not current_player
+        start_player = current_player
+        displayGameBoard(location)
+    game_turn()
+
     #if start_player == 0:
         #pass
 
