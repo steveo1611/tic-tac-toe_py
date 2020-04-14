@@ -12,14 +12,24 @@ thoughts on steps:
 """
 
 # Starting section   V1.0
+'''
 print("Welcome to the greatest tic tac toe game ever created!!!!\n")
 print(""""The rules of this game are:
 1: Players decide who will be 'X' and 'O'.
 2: Player that will start will be randomly decided.
 3: Player will determine where to place the game piece by selecting a number, the numbers will match the layout of the keyboard number pad.\n""")
+'''
+location = {'loc1': '-', 'loc2': 'X', 'loc3': 'X', 'loc4': '-',
+ 'loc5': 'X', 'loc6': 'X', 'loc7': 'X', 'loc8': '-', 'loc9': '-'}
 
-location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
-            'loc5': '-', 'loc6': '-', 'loc7': '-', 'loc8': '-', 'loc9': '-'}
+#location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
+#            'loc5': '-', 'loc6': '-', 'loc7': 'O', 'loc8': 'O', 'loc9': 'O'}
+
+#location = {'loc1': '-', 'loc2': '-', 'loc3': '-', 'loc4': '-',
+#            'loc5': '-', 'loc6': '-', 'loc7': '-', 'loc8': '-', 'loc9': '-'}            
+
+win_combo = [('loc1','loc2','loc3'),('loc4','loc5','loc6'),('loc7','loc8','loc9'),('loc2','loc5','loc8'),('loc1','loc5','loc9'),('loc3','loc5','loc7')]
+
 start_player = True
 first_player = 'x'
 second_player = 'x'
@@ -44,7 +54,6 @@ def displayGameBoard(location):
     print('')
 
 def set_mark_board(loc, player):
-    pass
     if start_player == True:
         location['loc'+loc] = "X"
         return
@@ -89,29 +98,57 @@ def game_turn():
     loc = input('Please select 1-9 to place your mark: ')
     validate_input(loc)
     set_mark_board(loc, current_player)
+    game_win_check(location)
+    if 1:
+        print('WINNER!!!!')
     current_player = not current_player
     start_player = current_player
-    print(start_player)
+    
     displayGameBoard(location)
     #if start_player == 0:
         #pass
 
 def game_win_check(location):
-    pass
-    '''
-1,2,3
-4,5,6
-7,8,9
-1,5,9
-3,5,7
+    chk_x = []
+    chk_o = []
+    count = 0
+    count2 = 0
+    match_count = 0
+    win_sub_counter = 0
+    
+    for i in location:
+        if location.get(i) == 'X':
+            chk_x.append(i)
+        elif location.get(i) == 'O':
+            chk_o.append(i)
+    while count < 6:
+        #print(win_sub)
+        if start_player == True:
+            player_icon = chk_x
+        else:
+            player_icon = chk_o    
+            for beep in player_icon:
+                win_sub_counter += 1
+                win_sub = list(win_combo[count2])
+                #print(beep)
+                for blah in win_sub:
+                    if win_sub_counter == 3:
+                        count2 += 1
+                        match_count = 0
+                    if blah in beep:
+           # print(win_sub)
+             #       print('xx')
+                        match_count += 1
+                        if match_count == 3:
+                            print('We have a WINNER')
+                            return 1
+            count +=1
+        return 0   
 
-'''
 
 
 game_start_launch()
 
-### location['loc1'] = "X"
-#print(location)
 #displayGameBoard(location)
 
 
@@ -128,15 +165,3 @@ def test_display():
     displayGameBoard(location)
 """
 
-"""    from random import random
-    x = ''
-    o = ''
-    for item in location:
-        if random() >= .5:
-            item = 'X'
-            print(item)
-        else:
-            item = 'O'
-            print(item)
-    return location() 
-"""
